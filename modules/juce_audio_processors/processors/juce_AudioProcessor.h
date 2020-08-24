@@ -838,6 +838,12 @@ public:
     virtual bool isMidiEffect() const                           { return false; }
 
     //==============================================================================
+    /** This gets called when the track- or context name changes. This is currently only supported
+        by AudioUnits, AAX and VST3.
+    */
+    virtual void trackNameChanged(const String& /*newName*/) {}
+
+    //==============================================================================
     /** This returns a critical section that will automatically be locked while the host
         is calling the processBlock() method.
 

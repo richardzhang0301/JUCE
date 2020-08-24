@@ -118,7 +118,7 @@ public:
     {
         // figure out the number of DPs needed to display all values at this
         // interval setting.
-        numDecimalPlaces = 7;
+        numDecimalPlaces = 3;
 
         if (normRange.interval != 0.0)
         {
@@ -1261,7 +1261,7 @@ public:
 
     TextEntryBoxPosition textBoxPos;
     String textSuffix;
-    int numDecimalPlaces = 7;
+    int numDecimalPlaces = 3;
     int textBoxWidth = 80, textBoxHeight = 20;
     IncDecButtonMode incDecButtonMode = incDecButtonsNotDraggable;
     ModifierKeys::Flags modifierToSwapModes = ModifierKeys::ctrlAltCommandModifiers;

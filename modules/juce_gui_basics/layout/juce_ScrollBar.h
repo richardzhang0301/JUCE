@@ -410,11 +410,13 @@ public:
     /** @internal */
     void setVisible (bool) override;
 
+protected:
+	  int thumbAreaStart = 0, thumbAreaSize = 0, thumbStart = 0, thumbSize = 0;
+
 private:
     //==============================================================================
     Range<double> totalRange { 0.0, 1.0 }, visibleRange { 0.0, 1.0 };
     double singleStepSize = 0.1, dragStartRange = 0;
-    int thumbAreaStart = 0, thumbAreaSize = 0, thumbStart = 0, thumbSize = 0;
     int dragStartMousePos = 0, lastMousePos = 0;
     int initialDelayInMillisecs = 100, repeatDelayInMillisecs = 50, minimumDelayInMillisecs = 10;
     bool vertical, isDraggingThumb = false, autohides = true, userVisibilityFlag = false;

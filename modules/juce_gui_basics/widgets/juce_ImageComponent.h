@@ -62,6 +62,8 @@ public:
     */
     void setImagePlacement (RectanglePlacement newPlacement);
 
+    void setResamplingQuality(Graphics::ResamplingQuality newQuality);
+
     /** Returns the current image placement. */
     RectanglePlacement getImagePlacement() const;
 
@@ -72,6 +74,8 @@ public:
 private:
     Image image;
     RectanglePlacement placement;
+
+    Graphics::ResamplingQuality resamplingQuality;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ImageComponent)
 };

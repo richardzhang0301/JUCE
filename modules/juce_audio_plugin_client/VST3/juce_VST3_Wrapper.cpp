@@ -1676,6 +1676,7 @@ class JuceVST3Component : public Vst::IComponent,
                           public Vst::IAudioProcessor,
                           public Vst::IUnitInfo,
                           public Vst::IConnectionPoint,
+                          public Vst::ChannelContext::IInfoListener,
                           public AudioPlayHead
 {
 public:
@@ -2190,6 +2191,24 @@ public:
        #endif
 
         return state->write (mem.getData(), (Steinberg::int32) mem.getSize());
+    }
+
+    tresult PLUGIN_API setChannelContextInfos (Vst::IAttributeList* list) override
+    {
+        // see ivstchannelcontextinfo.h for an example that retrieves more properties like Plug-in Channel Location (kPreVolumeFader, etc.)
+        jassert(pluginInstance);
+
+        if (list)
+        {
+            // get the Channel Name where we, as Plug-in, are instantiated
+            Vst::String128 name;
+            if (list->getString (Vst::ChannelContext::kChannelNameKey, name, sizeof (name)) == kResultTrue)
+            {
+                pluginInstance->trackNameChanged(toString(name));
+            }
+        }
+
+        return kResultTrue;
     }
 
     //==============================================================================

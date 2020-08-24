@@ -28,7 +28,8 @@ namespace juce
 
 ImageComponent::ImageComponent (const String& name)
     : Component (name),
-      placement (RectanglePlacement::centred)
+      placement (RectanglePlacement::centred),
+      resamplingQuality(Graphics::mediumResamplingQuality)
 {
 }
 
@@ -64,6 +65,15 @@ void ImageComponent::setImagePlacement (RectanglePlacement newPlacement)
     }
 }
 
+void ImageComponent::setResamplingQuality (Graphics::ResamplingQuality newQuality)
+{
+	if (resamplingQuality != newQuality)
+	{
+		resamplingQuality = newQuality;
+		repaint();
+	}
+}
+
 const Image& ImageComponent::getImage() const
 {
     return image;
@@ -77,6 +87,7 @@ RectanglePlacement ImageComponent::getImagePlacement() const
 void ImageComponent::paint (Graphics& g)
 {
     g.setOpacity (1.0f);
+    g.setImageResamplingQuality(resamplingQuality);
     g.drawImage (image, getLocalBounds().toFloat(), placement);
 }
 

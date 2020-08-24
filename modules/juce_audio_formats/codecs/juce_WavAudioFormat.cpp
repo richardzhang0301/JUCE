@@ -912,6 +912,7 @@ namespace WavFileHelpers
     static const ExtensibleWavSubFormat pcmFormat       = { 0x00000001, 0x0000, 0x0010, { 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71 } };
     static const ExtensibleWavSubFormat IEEEFloatFormat = { 0x00000003, 0x0000, 0x0010, { 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71 } };
     static const ExtensibleWavSubFormat ambisonicFormat = { 0x00000001, 0x0721, 0x11d3, { 0x86, 0x44, 0xC8, 0xC1, 0xCA, 0x00, 0x00, 0x00 } };
+    static const ExtensibleWavSubFormat HOAFormat = { 0x00000003, 0x0721, 0x11d3, { 0x86, 0x44, 0xC8, 0xC1, 0xCA, 0x00, 0x00, 0x00 } };
 
     struct DataSize64Chunk   // chunk ID = 'ds64' if data size > 0xffffffff, 'JUNK' otherwise
     {
@@ -1026,7 +1027,7 @@ public:
                             subFormat.data3 = (uint16) input->readShort();
                             input->read (subFormat.data4, sizeof (subFormat.data4));
 
-                            if (subFormat == IEEEFloatFormat)
+                            if (subFormat == IEEEFloatFormat || subFormat == HOAFormat)
                                 usesFloatingPointData = true;
                             else if (subFormat != pcmFormat && subFormat != ambisonicFormat)
                                 bytesPerFrame = 0;
